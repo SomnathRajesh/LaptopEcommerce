@@ -1,0 +1,128 @@
+﻿@using LaptopSales.Models;
+@model IEnumerable<Laptops>
+@{
+    ViewData["Title"] = "Index";
+    ViewData["ControllerName"] = "Laptop";
+}
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Laptop List</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-action="Create" class="btn btn-info"><i class="fa-solid fa-plus" style="color: #095cec;"></i>&nbsp; Add New Laptop</a>
+    </div>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-3">
+            <input type="number" class="form-control" name="lowAmount" />
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control" name="hugeAmount" />
+        </div>
+        <div class="col-3">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+        <div class="col-3"></div>
+    </div>
+</form>
+
+<br />
+<div>
+    <table class="table table-striped border" id="myTable">
+        <thead>
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(l=>l.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.LaptopColor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.IsAvailable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.LaptopTypeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.TagId)
+                </th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.LaptopColor</td>
+                    <td>@item.Description</td>
+                    <td>@item.IsAvailable</td>
+                    <td>@item.LaptopTypes.LaptopType</td>
+                    <td>@item.Tags.TagName</td>
+                    <td>
+                        <partial name="_ButtonPartial" model="@item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
+        
+    </table>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script type="text/javascript">
+        console.log("Datatable should load");
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csvHtml5',
+                        title:'Laptop List'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Laptop List'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Laptop List'
+                    },
+                    'copyHtml5',
+                    'print'
+                ]
+            });
+        });
+        $(function () {
+            var save = '@TempData["save"]';
+            if (save != '') {
+                alertify.success(save);
+            }
+            var update = '@TempData["update"]';
+            console.log("Hello");
+            if (update != '') {
+                alertify.success(update);
+            }
+            var del = '@TempData["delete"]';
+            if (del != '') {
+                alertify.warning(del);
+            }
+        })
+    </script>
+}
+
