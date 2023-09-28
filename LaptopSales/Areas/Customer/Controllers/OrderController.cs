@@ -47,7 +47,8 @@ namespace LaptopSales.Areas.Customer.Controllers
             _db.Order.Add(anOrder);
             await _db.SaveChangesAsync();
             HttpContext.Session.Set("laptops", new List<Laptops>());
-            return View();
+            //return View();
+            return RedirectToAction("Orders");
         }
 
         public string GetOrderNo()

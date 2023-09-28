@@ -35,7 +35,7 @@ namespace LaptopSales.Areas.Customer.Controllers
                 {
                     var addRole = await _userManager.AddToRoleAsync(user, "User");
                     TempData["Save"] = "User has been created successfully";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index","Home");
                 }
                 foreach (var err in result.Errors)
                 {

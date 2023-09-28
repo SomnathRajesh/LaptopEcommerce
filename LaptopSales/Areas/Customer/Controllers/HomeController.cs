@@ -29,7 +29,7 @@ namespace LaptopSales.Areas.Customer.Controllers
         [HttpPost]
         public IActionResult Index(int? page, decimal? lowAmount, decimal? hugeAmount, string? searchInput)
         {
-            var laptops = _db.Laptops.Include(c => c.LaptopTypes).Include(c => c.Tags).Where(c => c.Price >= lowAmount && c.Price <= hugeAmount && c.Name.Contains(searchInput) || c.LaptopTypes.LaptopType.Contains(searchInput) || c.Tags.TagName.Contains(searchInput)).ToList();
+            var laptops = _db.Laptops.Include(c => c.LaptopTypes).Include(c => c.Tags).Where(c => c.Price >= lowAmount && c.Price <= hugeAmount).Where(c=> c.Name.Contains(searchInput) || c.LaptopTypes.LaptopType.Contains(searchInput) || c.Tags.TagName.Contains(searchInput)).ToList();
             if (searchInput!=null && (lowAmount == null || hugeAmount == null))
             {
                 laptops = _db.Laptops.Include(c => c.LaptopTypes).Include(c => c.Tags).Where(c => c.Name.Contains(searchInput) || c.LaptopTypes.LaptopType.Contains(searchInput) || c.Tags.TagName.Contains(searchInput)).ToList();
