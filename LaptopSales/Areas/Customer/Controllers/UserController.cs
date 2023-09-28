@@ -1,5 +1,6 @@
 ﻿using LaptopSales.Data;
 using LaptopSales.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,14 +9,14 @@ namespace LaptopSales.Areas.Customer.Controllers
     [Area("Customer")]
     public class UserController : Controller
     {
-        UserManager<IdentityUser> _userManager;
-        ApplicationDbContext _db;
+        private UserManager<IdentityUser> _userManager;
+        private ApplicationDbContext _db;
         public UserController(UserManager<IdentityUser> userManager, ApplicationDbContext db)
         {
             _userManager = userManager;
             _db = db;
         }
-
+        [Authorize(Roles ="SuperUser")]
         public IActionResult Index()
         {
             return View(_db.ApplicationUsers.ToList());

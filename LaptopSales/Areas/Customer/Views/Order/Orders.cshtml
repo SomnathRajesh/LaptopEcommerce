@@ -1,0 +1,69 @@
+﻿@using LaptopSales.Models;
+@model IEnumerable<OrderDetails>
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["ControllerName"] = "Order";
+}
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Order List</h2>
+    </div>
+</div>
+
+<br />
+<div>
+    <table class="table table-striped border" id="myTable">
+        <thead>
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(l=>l.Order.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Order.PhoneNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Order.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Order.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Order.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Laptops.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(l=>l.Laptops.Price)
+                </th>
+                
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Order.Name</td>
+                    <td>@item.Order.PhoneNo</td>
+                    <td>@item.Order.Email</td>
+                    <td>@item.Order.Address</td>
+                    <td>@item.Order.OrderDate</td>
+                    <td>@item.Laptops.Name</td>
+                    <td>@item.Laptops.Price</td>
+                   
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+
+@section scripts{
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+}
+

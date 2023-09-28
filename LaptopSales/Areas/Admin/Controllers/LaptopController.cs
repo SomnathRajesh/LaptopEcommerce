@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LaptopSales.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperUser")]
     public class LaptopController : Controller
     {
         private ApplicationDbContext _db;

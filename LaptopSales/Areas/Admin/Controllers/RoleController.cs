@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace LaptopSales.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperUser")]
     public class RoleController : Controller
     {
         RoleManager<IdentityRole> _roleManager;

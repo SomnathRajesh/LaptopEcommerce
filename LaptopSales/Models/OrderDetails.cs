@@ -13,10 +13,17 @@ namespace LaptopSales.Models
         [Display(Name ="Laptop")]
         public int LaptopId { get; set; }
 
+        [Display(Name = "User")]
+        public string UserId { get; set; }
+
         [ForeignKey("OrderId")]
         public Order? Order { get; set; }
 
         [ForeignKey("LaptopId")]
         public Laptops? Laptops { get; set; }
+
+        [ForeignKey("UserId")]
+        public ApplicationUser? User { get; set; }
+        
     }
 }

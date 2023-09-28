@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LaptopSales.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperUser")]
     public class LaptopTypesController : Controller
     {
         private ApplicationDbContext _db;

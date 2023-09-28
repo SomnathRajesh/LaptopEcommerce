@@ -126,11 +126,12 @@ namespace LaptopSales.Areas.Identity.Pages.Account
                                     select new UserSession()
                                     {
                                         UserName = Input.Email,
-                                        RoleName = r.Name
+                                        RoleName = r.Name,
                                     }).FirstOrDefault();
                     if (roleInfo != null)
                     {
                         HttpContext.Session.SetString("roleName", roleInfo.RoleName);
+                        HttpContext.Session.SetString("UserId", userInfo.Id);
                     }
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
